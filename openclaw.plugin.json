@@ -1,0 +1,15 @@
+{
+  "id": "tencent-hunyuan-image-lite",
+  "activation": {
+    "onStartup": false
+  },
+  "enabledByDefault": true,
+  "contracts": {
+    "imageGenerationProviders": ["tencent-hunyuan-image-lite"]
+  },
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {}
+  }
+}
