@@ -1,11 +1,11 @@
 {
-  "id": "tencent-hunyuan-image-lite",
+  "id": "tencent-tokenhub",
   "activation": {
     "onStartup": false
   },
   "enabledByDefault": true,
   "contracts": {
-    "imageGenerationProviders": ["tencent-hunyuan-image-lite"]
+    "imageGenerationProviders": ["tencent-tokenhub"]
   },
   "configSchema": {
     "type": "object",

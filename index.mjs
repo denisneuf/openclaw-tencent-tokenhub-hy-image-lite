@@ -1,6 +1,6 @@
 import { definePluginEntry } from "openclaw/plugin-sdk/plugin-entry";
 
-const PROVIDER_ID = "tencent-hunyuan-image-lite";
+const PROVIDER_ID = "tencent-tokenhub";
 const DEFAULT_MODEL = "hy-image-lite";
 const BASE_URL = "https://tokenhub.tencentmaas.com/v1/api/image/lite";
 
