@@ -1,6 +1,6 @@
 {
-  "name": "tencent-hunyuan-image-lite-plugin",
-  "version": "1.0.0",
+  "name": "tencent-tokenhub-hy-image-lite",
+  "version": "1.0.1",
   "private": true,
   "description": "OpenClaw plugin for Tencent Hunyuan Image Lite via TokenHub",
   "type": "module",
