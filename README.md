@@ -1,26 +1,20 @@
-# Tencent Hunyuan Image Lite — OpenClaw Plugin
+# Tencent TokenHub Hy Image Lite — OpenClaw Plugin
 
-Plugin no oficial para generar imágenes con **Tencent Hunyuan Image Lite (`hy-image-lite`)** a través de TokenHub.
+Plugin no oficial para generar imágenes con **Hy Image Lite** a través de **TokenHub** (`tokenhub.tencentmaas.com`).
 
-No usa el endpoint estándar de OpenAI (`/v1/images/generations`), por lo que el builder oficial de OpenClaw no es compatible. Este plugin hace la llamada directa al endpoint de Hunyuan.
+No usa el endpoint estándar de OpenAI (`/v1/images/generations`), por lo que el builder oficial de OpenClaw no es compatible. Este plugin hace la llamada directa al endpoint de TokenHub.
 
 ## Requisitos
 
 - OpenClaw 2026.x
-- API key de Tencent TokenHub o Hunyuan
+- API key de Tencent TokenHub
 
 ## Instalación
 
 ### Desde GitHub
 
 ```bash
-openclaw plugins install git:github.com/denisneuf/openclaw-tencent-hunyuan-image-lite
-```
-
-### Desde npm (si está publicado)
-
-```bash
-openclaw plugins install npm:openclaw-tencent-hunyuan-image-lite
+openclaw plugins install git:github.com/denisneuf/openclaw-tencent-tokenhub-hy-image-lite
 ```
 
 ### Desde local (desarrollo)
@@ -33,62 +27,44 @@ openclaw plugins install --link ./ruta/al/plugin
 
 ### 1. API Key
 
-Asegúrate de tener `TOKENHUB_API_KEY` o `HUNYUAN_API_KEY` en tu entorno (`~/.openclaw/.env`):
+Asegúrate de tener `TOKENHUB_API_KEY` en tu entorno (`~/.openclaw/.env`):
 
 ```
-TOKENHUB_API_KEY=sk-tu-key-aqui
+TOKENHUB_API_KEY=***
 ```
 
-### 2. Provider en `openclaw.json`
-
-Añade este bloque dentro de `models.providers`:
+### 2. Modelo por defecto (en `openclaw.json`)
 
 ```json
-"tencent-hunyuan-image-lite": {
-  "apiKey": "***",
-  "baseUrl": "https://tokenhub.tencentmaas.com/v1/api/image/lite",
-  "api": "openai-completions",
-  "models": [
-    {
-      "id": "hy-image-lite",
-      "name": "Hy Image Lite"
+"agents": {
+  "defaults": {
+    "imageGenerationModel": {
+      "primary": "tencent-tokenhub/hy-image-lite"
     }
-  ]
+  }
 }
 ```
 
-### 3. Modelo por defecto (opcional)
-
-En `agents.defaults`:
+### 3. Plugin entries (solo si no se añadió automáticamente)
 
 ```json
-"imageGenerationModel": {
-  "primary": "tencent-hunyuan-image-lite/hy-image-lite"
-}
-```
-
-### 4. Plugin entries
-
-Si no se añadió automáticamente al instalar, verifica que `plugins.entries` tenga:
-
-```json
-"tencent-hunyuan-image-lite": {
+"tencent-tokenhub": {
   "enabled": true
 }
 ```
 
 ## Uso
 
-Una vez configurado, el agente usará este provider automáticamente para `image_generate` si está puesto como `imageGenerationModel.primary`. También puedes forzarlo:
+Una vez configurado, el agente usará este provider automáticamente para `image_generate`. También puedes forzarlo:
 
 ```text
 Genera una imagen de un gato con gafas
 ```
 
-O llamar a la tool directamente con el modelo:
+O llamar a la tool directamente:
 
 ```text
-/tool image_generate action=generate model=tencent-hunyuan-image-lite/hy-image-lite prompt="gato con gafas"
+/tool image_generate action=generate model=tencent-tokenhub/hy-image-lite prompt="gato con gafas"
 ```
 
 ## Verificar que funciona
@@ -100,7 +76,7 @@ openclaw tools image_generate action=list
 Deberías ver:
 
 ```
-tencent-hunyuan-image-lite (default hy-image-lite)
+tencent-tokenhub (default hy-image-lite)
   models: hy-image-lite
   configured: yes
 ```
@@ -108,7 +84,7 @@ tencent-hunyuan-image-lite (default hy-image-lite)
 ## Limitaciones
 
 - **No soporta edición de imágenes** (solo generación desde texto)
-- **No soporta sizes, aspect ratios ni resoluciones** — Hunyuan Image Lite usa su propio tamaño por defecto
+- **No soporta sizes, aspect ratios ni resoluciones** — el endpoint usa su propio tamaño por defecto
 - **Solo 1 imagen por llamada** (`maxCount: 1`)
 - El endpoint **no sigue el estándar OpenAI** (`/v1/api/image/lite` en lugar de `/v1/images/generations`)
 
